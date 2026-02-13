@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/*
+ * Smart Attendance Admin — Custom Styles
+ * Uses Tailwind v4 with CSS variables for theming.
+ */
+
+@theme {
+  --color-primary-50: oklch(0.97 0.01 250);
+  --color-primary-100: oklch(0.93 0.03 250);
+  --color-primary-200: oklch(0.87 0.06 250);
+  --color-primary-300: oklch(0.78 0.10 250);
+  --color-primary-400: oklch(0.68 0.15 250);
+  --color-primary-500: oklch(0.58 0.19 250);
+  --color-primary-600: oklch(0.50 0.20 250);
+  --color-primary-700: oklch(0.44 0.18 250);
+  --color-primary-800: oklch(0.37 0.14 250);
+  --color-primary-900: oklch(0.30 0.10 250);
+
+  --color-sidebar: oklch(0.20 0.03 260);
+  --color-sidebar-hover: oklch(0.25 0.04 260);
+  --color-sidebar-active: oklch(0.30 0.06 260);
+
+  --color-surface: oklch(0.985 0.00 0);
+  --color-surface-raised: oklch(1.00 0.00 0);
+  --color-border: oklch(0.92 0.00 0);
+  --color-border-hover: oklch(0.85 0.00 0);
+
+  --color-success-50: oklch(0.96 0.03 150);
+  --color-success-500: oklch(0.55 0.18 150);
+  --color-success-700: oklch(0.40 0.14 150);
+
+  --color-warning-50: oklch(0.97 0.04 85);
+  --color-warning-500: oklch(0.70 0.16 70);
+  --color-warning-700: oklch(0.55 0.14 60);
+
+  --color-danger-50: oklch(0.97 0.02 25);
+  --color-danger-500: oklch(0.55 0.18 25);
+  --color-danger-700: oklch(0.42 0.16 25);
+}
+
+/* ─── Base resets ───────────────────────────────────────────── */
+body {
+  background-color: var(--color-surface);
+}
+
+/* ─── Custom scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.80 0.00 0);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.70 0.00 0);
+}
+
+/* ─── Table ─────────────────────────────────────────────────── */
+.table-row-hover:hover {
+  background-color: oklch(0.98 0.005 250);
+}
+
+/* ─── Animations ────────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+.animate-slide-in {
+  animation: slide-in-left 0.15s ease-out;
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
