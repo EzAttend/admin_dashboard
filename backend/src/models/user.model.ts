@@ -37,7 +37,7 @@ const userSchema = new Schema<IUser>(
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true, collection: 'auth_users' },
 );
 
 export const User = model<IUser>('User', userSchema);

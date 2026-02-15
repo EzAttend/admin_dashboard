@@ -1,5 +1,5 @@
 import type { ConsumeMessage } from 'amqplib';
-import { getChannel, MAX_RETRIES, QUEUES } from '@/config/queue';
+import { getChannel, MAX_RETRIES, QUEUES, setOnReconnect } from '@/config/queue';
 import { ingestCsv } from '@/ingestion';
 import type { EntityConfig } from '@/ingestion';
 import {
@@ -97,6 +97,11 @@ async function handleMessage(msg: ConsumeMessage): Promise<void> {
 }
 
 export async function startWorker(): Promise<void> {
+  setOnReconnect(subscribeConsumers);
+  await subscribeConsumers();
+}
+
+async function subscribeConsumers(): Promise<void> {
   const channel = await getChannel();
 
   for (const queue of Object.values(QUEUES)) {

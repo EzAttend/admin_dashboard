@@ -194,7 +194,9 @@ export const studentEntityConfig: EntityConfig<StudentCsvRow> = {
           await AuthAccount.insertMany(
             users.map((u, idx) => ({
               userId: u._id,
-              password_hash: chunkHashes[idx],
+              accountId: u._id,
+              providerId: 'credential',
+              password: chunkHashes[idx],
             })),
             { session },
           );
@@ -283,7 +285,9 @@ export const teacherEntityConfig: EntityConfig<TeacherCsvRow> = {
           await AuthAccount.insertMany(
             users.map((u, idx) => ({
               userId: u._id,
-              password_hash: chunkHashes[idx],
+              accountId: u._id,
+              providerId: 'credential',
+              password: chunkHashes[idx],
             })),
             { session },
           );
