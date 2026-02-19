@@ -54,7 +54,7 @@ export const teacherService = {
       );
 
       await AuthAccount.create(
-        [{ userId: user._id, password_hash: passwordHash }],
+        [{ userId: user._id, accountId: user._id, providerId: 'credential', password: passwordHash }],
         { session },
       );
 
@@ -118,7 +118,7 @@ export const teacherService = {
         const passwordHash = await hashPassword(password);
         await AuthAccount.updateOne(
           { userId: existing.userId },
-          { $set: { password_hash: passwordHash } },
+          { $set: { password: passwordHash } },
           { session },
         );
       }

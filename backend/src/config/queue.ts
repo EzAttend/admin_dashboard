@@ -25,12 +25,44 @@ export const ENTITY_TYPE_TO_QUEUE: Record<string, QueueName> = {
 const DLX_EXCHANGE = 'dlx.exchange';
 const MAX_RETRIES = 3;
 
+const RECONNECT_DELAY_MS = 5_000;
+
 function dlqName(queue: string): string {
   return `${queue}.dlq`;
 }
 
 let connection: Awaited<ReturnType<typeof amqplib.connect>> | null = null;
 let channel: Channel | null = null;
+let reconnecting = false;
+let intentionalClose = false;
+
+//reconnnection logic
+let onReconnect: (() => Promise<void>) | null = null;
+export function setOnReconnect(cb: () => Promise<void>): void {
+  onReconnect = cb;
+}
+async function reconnect(): Promise<void> {
+  if (reconnecting) return;
+  reconnecting = true;
+
+  console.log(`[Queue] Reconnecting in ${RECONNECT_DELAY_MS / 1000}s…`);
+  await new Promise((r) => setTimeout(r, RECONNECT_DELAY_MS));
+
+  try {
+    await connectQueue();
+
+    if (onReconnect) {
+      await onReconnect();
+      console.log('[Queue] Consumers re-established after reconnect');
+    }
+  } catch (err) {
+    console.error('[Queue] Reconnect failed:', (err as Error).message);
+    reconnecting = false;  
+    reconnect();
+    return;
+  }
+  reconnecting = false;
+}
 
 export async function connectQueue(): Promise<Channel> {
   if (channel) return channel;
@@ -69,6 +101,10 @@ export async function connectQueue(): Promise<Channel> {
     console.warn('[Queue] RabbitMQ connection closed');
     channel = null;
     connection = null;
+
+    if (!intentionalClose) {
+      reconnect();
+    }
   });
 
   return ch;
@@ -82,6 +118,7 @@ export async function getChannel(): Promise<Channel> {
 }
 
 export async function disconnectQueue(): Promise<void> {
+  intentionalClose = true;
   if (channel) {
     await channel.close();
     channel = null;
@@ -90,6 +127,7 @@ export async function disconnectQueue(): Promise<void> {
     await (connection as unknown as { close(): Promise<void> }).close();
     connection = null;
   }
+  intentionalClose = false;
   console.log('[Queue] RabbitMQ disconnected');
 }
 
