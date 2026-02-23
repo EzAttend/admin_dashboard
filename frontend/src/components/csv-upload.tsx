@@ -270,20 +270,20 @@ export function CsvUpload() {
           const isDone = step > stepNum;
           return (
             <div key={label} className="flex items-center gap-2">
-              {i > 0 && <div className="w-8 h-px bg-border" />}
+              {i > 0 && <div className="w-8 h-px bg-[#333]" />}
               <div className="flex items-center gap-2">
                 <div
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${
                     isDone
-                      ? 'bg-success-500 text-white'
+                      ? 'bg-emerald-500 text-white'
                       : isActive
-                        ? 'bg-primary-600 text-white'
-                        : 'bg-gray-100 text-gray-400'
+                        ? 'bg-accent-500 text-white'
+                        : 'bg-[#333] text-[#737373]'
                   }`}
                 >
                   {isDone ? <CheckCircle2 className="w-3.5 h-3.5" /> : stepNum}
                 </div>
-                <span className={isActive || isDone ? 'text-gray-900 font-medium' : 'text-gray-400'}>
+                <span className={isActive || isDone ? 'text-white font-medium' : 'text-[#737373]'}>
                   {label}
                 </span>
               </div>
@@ -295,7 +295,7 @@ export function CsvUpload() {
       {/* ─── Step 1: Choose entity type ─────────────────────── */}
       {step === 1 && (
         <div className="space-y-4">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-[#737373]">
             Select the type of data you want to import. Each type requires
             specific columns in your CSV file.
           </p>
@@ -306,16 +306,16 @@ export function CsvUpload() {
                 <button
                   key={opt.value}
                   onClick={() => selectEntity(opt.value)}
-                  className="text-left bg-surface-raised border border-border rounded-xl p-5 hover:border-primary-400 hover:shadow-sm transition-all group"
+                  className="text-left card p-5 hover:border-accent-500/50 transition-all group"
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center group-hover:bg-primary-100 transition-colors">
-                      <Icon className="w-5 h-5 text-primary-600" />
+                    <div className="w-10 h-10 rounded-lg bg-accent-500/10 flex items-center justify-center group-hover:bg-accent-500/20 transition-colors">
+                      <Icon className="w-5 h-5 text-accent-500" />
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">{opt.label}</p>
+                      <p className="font-semibold text-white">{opt.label}</p>
                       {opt.prerequisites.length > 0 && (
-                        <p className="text-[10px] text-gray-400">
+                        <p className="text-[10px] text-[#737373]">
                           Requires: {opt.prerequisites.join(', ')}
                         </p>
                       )}
@@ -323,19 +323,19 @@ export function CsvUpload() {
                   </div>
                   <div className="space-y-1">
                     {opt.columns.slice(0, 3).map((col) => (
-                      <div key={col.name} className="flex items-center gap-2 text-xs text-gray-500">
-                        <span className="font-medium text-gray-700">{col.name}</span>
-                        <span className="text-gray-300">|</span>
-                        <span className="text-gray-400">{col.example}</span>
+                      <div key={col.name} className="flex items-center gap-2 text-xs text-[#a3a3a3]">
+                        <span className="font-medium text-[#e5e5e5]">{col.name}</span>
+                        <span className="text-[#525252]">|</span>
+                        <span className="text-[#737373]">{col.example}</span>
                       </div>
                     ))}
                     {opt.columns.length > 3 && (
-                      <p className="text-[10px] text-gray-400">
+                      <p className="text-[10px] text-[#737373]">
                         +{opt.columns.length - 3} more columns
                       </p>
                     )}
                   </div>
-                  <div className="mt-3 flex items-center gap-1 text-xs text-gray-400 group-hover:text-primary-600 transition-colors">
+                  <div className="mt-3 flex items-center gap-1 text-xs text-[#737373] group-hover:text-accent-500 transition-colors">
                     <span>Select</span>
                     <ArrowRight className="w-3 h-3" />
                   </div>
@@ -352,44 +352,44 @@ export function CsvUpload() {
           {/* Back button */}
           <button
             onClick={() => { setStep(1); setFile(null); }}
-            className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-sm text-[#737373] hover:text-white transition-colors"
           >
             &larr; Back to type selection
           </button>
 
           {/* Column reference */}
-          <div className="bg-surface-raised border border-border rounded-xl overflow-hidden">
-            <div className="px-5 py-3.5 border-b border-border flex items-center gap-2">
-              <Info className="w-4 h-4 text-primary-500" />
-              <h3 className="text-sm font-semibold text-gray-900">
+          <div className="card overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-[#333] flex items-center gap-2">
+              <Info className="w-4 h-4 text-accent-500" />
+              <h3 className="text-sm font-semibold text-white">
                 CSV Columns for {selectedOption.label}
               </h3>
             </div>
             <div className="p-5">
               {selectedOption.notes && (
-                <p className="text-xs text-gray-500 mb-3">{selectedOption.notes}</p>
+                <p className="text-xs text-[#737373] mb-3">{selectedOption.notes}</p>
               )}
               <div className="overflow-x-auto">
                 <table className="w-full text-xs">
                   <thead>
-                    <tr className="border-b border-border">
-                      <th className="text-left py-2 pr-4 font-medium text-gray-500 uppercase tracking-wider">Column</th>
-                      <th className="text-left py-2 pr-4 font-medium text-gray-500 uppercase tracking-wider">Required</th>
-                      <th className="text-left py-2 font-medium text-gray-500 uppercase tracking-wider">Example</th>
+                    <tr className="border-b border-[#333]">
+                      <th className="text-left py-2 pr-4 font-medium text-[#737373] uppercase tracking-wider">Column</th>
+                      <th className="text-left py-2 pr-4 font-medium text-[#737373] uppercase tracking-wider">Required</th>
+                      <th className="text-left py-2 font-medium text-[#737373] uppercase tracking-wider">Example</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-border">
+                  <tbody className="divide-y divide-[#262626]">
                     {selectedOption.columns.map((col) => (
                       <tr key={col.name}>
-                        <td className="py-2 pr-4 font-medium text-gray-800">{col.name}</td>
+                        <td className="py-2 pr-4 font-medium text-white">{col.name}</td>
                         <td className="py-2 pr-4">
                           {col.required ? (
-                            <span className="text-success-500 font-medium">Yes</span>
+                            <span className="text-emerald-400 font-medium">Yes</span>
                           ) : (
-                            <span className="text-gray-400">No</span>
+                            <span className="text-[#737373]">No</span>
                           )}
                         </td>
-                        <td className="py-2 text-gray-500">{col.example}</td>
+                        <td className="py-2 text-[#a3a3a3]">{col.example}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -397,9 +397,9 @@ export function CsvUpload() {
               </div>
 
               {selectedOption.prerequisites.length > 0 && (
-                <div className="mt-4 flex items-start gap-2 bg-warning-50 rounded-lg px-3 py-2">
-                  <AlertTriangle className="w-3.5 h-3.5 text-warning-500 mt-0.5 shrink-0" />
-                  <p className="text-xs text-warning-700">
+                <div className="mt-4 flex items-start gap-2 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-2">
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" />
+                  <p className="text-xs text-amber-400">
                     <strong>Before importing:</strong> Make sure you have already
                     created {selectedOption.prerequisites.join(', ')} records.
                     The import will fail if referenced records don&apos;t exist.
@@ -416,34 +416,34 @@ export function CsvUpload() {
             onDrop={handleFileDrop}
             className={`border-2 border-dashed rounded-xl p-8 text-center transition-all ${
               dragging
-                ? 'border-primary-400 bg-primary-50'
+                ? 'border-accent-500 bg-accent-500/10'
                 : file
-                  ? 'border-success-500 bg-success-50'
-                  : 'border-border hover:border-gray-300 bg-surface-raised'
+                  ? 'border-emerald-500 bg-emerald-500/10'
+                  : 'border-[#333] hover:border-[#525252] bg-[#1a1a1a]'
             }`}
           >
             {file ? (
               <div className="flex items-center justify-center gap-3">
-                <FileText className="w-8 h-8 text-success-500" />
+                <FileText className="w-8 h-8 text-emerald-400" />
                 <div className="text-left">
-                  <p className="text-sm font-medium text-gray-900">{file.name}</p>
-                  <p className="text-xs text-gray-500">{(file.size / 1024).toFixed(1)} KB</p>
+                  <p className="text-sm font-medium text-white">{file.name}</p>
+                  <p className="text-xs text-[#737373]">{(file.size / 1024).toFixed(1)} KB</p>
                 </div>
                 <button
                   onClick={() => { setFile(null); if (fileRef.current) fileRef.current.value = ''; }}
-                  className="ml-4 p-1 rounded hover:bg-gray-200 text-gray-400 hover:text-gray-600"
+                  className="ml-4 p-1 rounded hover:bg-[#333] text-[#737373] hover:text-white"
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
             ) : (
               <>
-                <Upload className="w-8 h-8 text-gray-300 mx-auto mb-2" />
-                <p className="text-sm text-gray-600 mb-1">
+                <Upload className="w-8 h-8 text-[#525252] mx-auto mb-2" />
+                <p className="text-sm text-[#a3a3a3] mb-1">
                   Drag and drop your CSV file here
                 </p>
-                <p className="text-xs text-gray-400 mb-3">or</p>
-                <label className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 cursor-pointer transition-colors">
+                <p className="text-xs text-[#525252] mb-3">or</p>
+                <label className="inline-flex items-center gap-1.5 px-4 py-2 bg-accent-500 text-white rounded-lg text-sm font-medium hover:bg-accent-600 cursor-pointer transition-colors">
                   <FileText className="w-4 h-4" />
                   Browse files
                   <input
@@ -463,7 +463,7 @@ export function CsvUpload() {
             <button
               onClick={handleUpload}
               disabled={!file || uploading}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium text-sm hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent-500 text-white rounded-lg font-medium text-sm hover:bg-accent-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-lg shadow-accent-500/20"
             >
               {uploading ? (
                 <>
@@ -486,12 +486,12 @@ export function CsvUpload() {
         <div className="space-y-4">
           {/* Sync rejection */}
           {uploadResult?.status === 'error' && (
-            <div className="bg-danger-50 border border-red-200 rounded-xl p-5 space-y-4">
+            <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-5 space-y-4">
               <div className="flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-danger-500 mt-0.5 shrink-0" />
+                <AlertCircle className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-semibold text-danger-700">Import Rejected</p>
-                  <p className="text-sm text-danger-700/80 mt-1">
+                  <p className="font-semibold text-red-400">Import Rejected</p>
+                  <p className="text-sm text-red-400/80 mt-1">
                     {humanizeApiError(uploadResult.message)}
                   </p>
                 </div>
@@ -499,14 +499,14 @@ export function CsvUpload() {
 
               {/* Precondition errors — Special callout */}
               {uploadResult.errors?.some((e) => e.code === 'PRECONDITION_FAILED') && (
-                <div className="bg-warning-50 border border-amber-200 rounded-lg p-4">
+                <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
                   <div className="flex items-start gap-2">
-                    <AlertTriangle className="w-4 h-4 text-warning-500 mt-0.5 shrink-0" />
+                    <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-medium text-warning-700">
+                      <p className="text-sm font-medium text-amber-400">
                         Missing Required Data
                       </p>
-                      <p className="text-xs text-warning-700/70 mt-1">
+                      <p className="text-xs text-amber-400/70 mt-1">
                         Some records referenced in your file don&apos;t exist yet.
                         Create them first, then try importing again.
                       </p>
@@ -514,8 +514,8 @@ export function CsvUpload() {
                         {uploadResult.errors
                           ?.filter((e) => e.code === 'PRECONDITION_FAILED')
                           .map((e, i) => (
-                            <li key={i} className="text-xs text-warning-700 flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-warning-500 shrink-0" />
+                            <li key={i} className="text-xs text-amber-400 flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
                               {e.message}
                             </li>
                           ))}
@@ -529,25 +529,25 @@ export function CsvUpload() {
               {uploadResult.errors &&
                 uploadResult.errors.filter((e) => e.code !== 'PRECONDITION_FAILED').length > 0 && (
                   <div>
-                    <p className="text-sm font-medium text-danger-700 mb-2">
+                    <p className="text-sm font-medium text-red-400 mb-2">
                       Issues found ({uploadResult.errors.filter((e) => e.code !== 'PRECONDITION_FAILED').length})
                     </p>
-                    <div className="max-h-64 overflow-y-auto border border-red-100 rounded-lg">
+                    <div className="max-h-64 overflow-y-auto border border-red-500/20 rounded-lg">
                       <table className="w-full text-xs">
                         <thead className="sticky top-0">
-                          <tr className="bg-red-100/80 text-danger-700">
+                          <tr className="bg-red-900/30 text-red-400">
                             <th className="text-left px-3 py-2 font-medium">Row</th>
                             <th className="text-left px-3 py-2 font-medium">Column</th>
                             <th className="text-left px-3 py-2 font-medium">Issue</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-red-50">
+                        <tbody className="divide-y divide-red-500/10">
                           {uploadResult.errors
                             .filter((e) => e.code !== 'PRECONDITION_FAILED')
                             .map((e, i) => (
-                              <tr key={i} className="text-danger-700">
+                              <tr key={i} className="text-red-400">
                                 <td className="px-3 py-2 font-medium">{e.row}</td>
-                                <td className="px-3 py-2 text-danger-700/70">{e.column || '—'}</td>
+                                <td className="px-3 py-2 text-red-400/70">{e.column || '—'}</td>
                                 <td className="px-3 py-2">{humanizeErrorCode(e.code, e.message)}</td>
                               </tr>
                             ))}
@@ -561,13 +561,13 @@ export function CsvUpload() {
 
           {/* Job accepted */}
           {uploadResult?.status === 'ok' && uploadResult.data && (
-            <div className="bg-success-50 border border-emerald-200 rounded-xl p-5">
+            <div className="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-success-500" />
-                <p className="font-semibold text-success-700">Import Started</p>
+                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                <p className="font-semibold text-emerald-400">Import Started</p>
                 <StatusBadge status={job?.status ?? uploadResult.data.status} />
               </div>
-              <p className="text-sm text-success-700/80 mt-1">
+              <p className="text-sm text-emerald-400/80 mt-1">
                 Your {ENTITY_TYPE_LABELS[uploadResult.data.entityType] ?? 'data'} import
                 has been queued and is being processed.
               </p>
@@ -576,9 +576,9 @@ export function CsvUpload() {
 
           {/* Job progress */}
           {job && (
-            <div className="bg-surface-raised border border-border rounded-xl p-5 space-y-4">
+            <div className="card p-5 space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-gray-900">
+                <h3 className="text-sm font-semibold text-white">
                   Import Progress
                 </h3>
                 <StatusBadge status={job.status} />
@@ -586,18 +586,18 @@ export function CsvUpload() {
 
               {/* Progress bar */}
               <div>
-                <div className="flex items-center justify-between text-xs text-gray-500 mb-1.5">
+                <div className="flex items-center justify-between text-xs text-[#737373] mb-1.5">
                   <span>{job.processed_rows} of {job.total_rows} rows processed</span>
                   <span>{progressPct}%</span>
                 </div>
-                <div className="w-full bg-gray-100 rounded-full h-2">
+                <div className="w-full bg-[#262626] rounded-full h-2">
                   <div
                     className={`h-2 rounded-full transition-all duration-500 ${
                       job.status === 'FAILED'
-                        ? 'bg-danger-500'
+                        ? 'bg-red-500'
                         : job.status === 'COMPLETED'
-                          ? 'bg-success-500'
-                          : 'bg-primary-500'
+                          ? 'bg-emerald-500'
+                          : 'bg-accent-500'
                     }`}
                     style={{ width: `${progressPct}%` }}
                   />
@@ -613,8 +613,8 @@ export function CsvUpload() {
               </div>
 
               {polling && (
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                  <span className="h-2 w-2 rounded-full bg-primary-500 animate-pulse-soft" />
+                <div className="flex items-center gap-2 text-xs text-[#737373]">
+                  <span className="h-2 w-2 rounded-full bg-accent-500 animate-pulse-soft" />
                   Checking for updates...
                 </div>
               )}
@@ -622,23 +622,23 @@ export function CsvUpload() {
               {/* Row errors from worker */}
               {job.row_errors.length > 0 && (
                 <div>
-                  <p className="text-sm font-medium text-danger-700 mb-2">
+                  <p className="text-sm font-medium text-red-400 mb-2">
                     Issues ({job.row_errors.length})
                   </p>
-                  <div className="max-h-64 overflow-y-auto border border-red-100 rounded-lg">
+                  <div className="max-h-64 overflow-y-auto border border-red-500/20 rounded-lg">
                     <table className="w-full text-xs">
                       <thead className="sticky top-0">
-                        <tr className="bg-red-50 text-danger-700">
+                        <tr className="bg-red-900/30 text-red-400">
                           <th className="text-left px-3 py-2 font-medium">Row</th>
                           <th className="text-left px-3 py-2 font-medium">Column</th>
                           <th className="text-left px-3 py-2 font-medium">Issue</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-red-50">
+                      <tbody className="divide-y divide-red-500/10">
                         {job.row_errors.map((e, i) => (
-                          <tr key={i} className="text-danger-700">
+                          <tr key={i} className="text-red-400">
                             <td className="px-3 py-2 font-medium">{e.row}</td>
-                            <td className="px-3 py-2 text-danger-700/70">{e.column || '—'}</td>
+                            <td className="px-3 py-2 text-red-400/70">{e.column || '—'}</td>
                             <td className="px-3 py-2">{humanizeErrorCode(e.code, e.message)}</td>
                           </tr>
                         ))}
@@ -653,7 +653,7 @@ export function CsvUpload() {
           {/* Reset */}
           <button
             onClick={handleReset}
-            className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-[#737373] hover:text-white transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             Start a new import
@@ -677,13 +677,13 @@ function StatPill({
 }) {
   const colors =
     variant === 'success'
-      ? 'text-success-700'
+      ? 'text-emerald-400'
       : variant === 'danger'
-        ? 'text-danger-700'
-        : 'text-gray-700';
+        ? 'text-red-400'
+        : 'text-white';
   return (
-    <div className="bg-gray-50 rounded-lg px-3 py-2 text-center">
-      <p className="text-xs text-gray-500">{label}</p>
+    <div className="bg-[#1a1a1a] rounded-lg px-3 py-2 text-center">
+      <p className="text-xs text-[#737373]">{label}</p>
       <p className={`text-lg font-semibold ${colors}`}>{value}</p>
     </div>
   );

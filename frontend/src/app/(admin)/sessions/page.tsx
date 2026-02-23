@@ -10,7 +10,7 @@ const columns: Column<SessionEntity>[] = [
     key: 'date',
     header: 'Date',
     render: (v) => (
-      <span className="font-medium text-gray-900">
+      <span className="font-medium text-white">
         {new Date(v as string).toLocaleDateString()}
       </span>
     ),
@@ -20,16 +20,16 @@ const columns: Column<SessionEntity>[] = [
     header: 'Timetable',
     render: (v) => {
       if (!v || typeof v === 'string') {
-        return <span className="text-gray-400">—</span>;
+        return <span className="text-[#525252]">—</span>;
       }
       const t = v as { class_id?: { class_name: string }; subject_id?: { subject_name: string }; day_of_week: string; start_time: string };
       const className = t.class_id?.class_name ?? '';
       const subjectName = t.subject_id?.subject_name ?? '';
       return (
-        <span className="text-xs">
+        <span className="text-xs text-[#a3a3a3]">
           {className} - {subjectName}
           <br />
-          <span className="text-gray-500">{t.day_of_week} {t.start_time}</span>
+          <span className="text-[#737373]">{t.day_of_week} {t.start_time}</span>
         </span>
       );
     },
@@ -40,7 +40,7 @@ const columns: Column<SessionEntity>[] = [
     render: (v) => (
       <span
         className={`text-xs px-2 py-0.5 rounded-full ${
-          v ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
+          v ? 'bg-emerald-500/10 text-emerald-400' : 'bg-[#333] text-[#737373]'
         }`}
       >
         {v ? 'Active' : 'Inactive'}
@@ -52,11 +52,11 @@ const columns: Column<SessionEntity>[] = [
     header: 'Actual Start',
     render: (v) =>
       v ? (
-        <span className="text-xs text-gray-600">
+        <span className="text-xs text-[#a3a3a3]">
           {new Date(v as string).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
         </span>
       ) : (
-        <span className="text-gray-400">—</span>
+        <span className="text-[#525252]">—</span>
       ),
   },
   {
@@ -64,11 +64,11 @@ const columns: Column<SessionEntity>[] = [
     header: 'Location',
     render: (v) => {
       if (!v || typeof v !== 'object') {
-        return <span className="text-gray-400">Not set</span>;
+        return <span className="text-[#525252]">Not set</span>;
       }
       const loc = v as { lat: number; lng: number };
       return (
-        <span className="text-xs text-gray-600">
+        <span className="text-xs text-[#a3a3a3]">
           {loc.lat.toFixed(4)}, {loc.lng.toFixed(4)}
         </span>
       );
@@ -78,7 +78,7 @@ const columns: Column<SessionEntity>[] = [
     key: 'createdAt',
     header: 'Created',
     render: (v) => (
-      <span className="text-gray-500 text-xs">
+      <span className="text-[#737373] text-xs">
         {new Date(v as string).toLocaleDateString()}
       </span>
     ),

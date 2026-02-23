@@ -11,14 +11,14 @@ const columns: Column<AttendanceEntity>[] = [
         header: 'Student',
         render: (v) => {
             if (!v || typeof v === 'string') {
-                return <span className="text-gray-400">{String(v) || '—'}</span>;
+                return <span className="text-[#525252]">{String(v) || '—'}</span>;
             }
             const student = v as StudentEntity;
             const name = typeof student.userId === 'object' ? student.userId.name : '';
             return (
                 <div>
-                    <span className="font-medium text-gray-900">{student.registration_number}</span>
-                    {name && <span className="text-xs text-gray-500 block">{name}</span>}
+                    <span className="font-medium text-white">{student.registration_number}</span>
+                    {name && <span className="text-xs text-text-muted block">{name}</span>}
                 </div>
             );
         },
@@ -28,18 +28,18 @@ const columns: Column<AttendanceEntity>[] = [
         header: 'Session',
         render: (v) => {
             if (!v || typeof v === 'string') {
-                return <span className="text-gray-400">—</span>;
+                return <span className="text-[#525252]">—</span>;
             }
             const session = v as SessionEntity;
             const date = new Date(session.date).toLocaleDateString();
-            return <span className="text-xs text-gray-600">{date}</span>;
+            return <span className="text-xs text-text-secondary">{date}</span>;
         },
     },
     {
         key: 'timestamp',
         header: 'Time',
         render: (v) => (
-            <span className="text-xs text-gray-600">
+            <span className="text-xs text-text-secondary">
                 {new Date(v as string).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
         ),
@@ -49,12 +49,12 @@ const columns: Column<AttendanceEntity>[] = [
         header: 'Status',
         render: (v) => {
             const colors: Record<string, string> = {
-                Present: 'bg-green-100 text-green-700',
-                Late: 'bg-yellow-100 text-yellow-700',
-                Absent: 'bg-red-100 text-red-700',
+                Present: 'bg-emerald-500/10 text-emerald-400',
+                Late: 'bg-amber-500/10 text-amber-400',
+                Absent: 'bg-red-500/10 text-red-400',
             };
             return (
-                <span className={`text-xs px-2 py-0.5 rounded-full ${colors[v as string] || 'bg-gray-100 text-gray-600'}`}>
+                <span className={`text-xs px-2 py-0.5 rounded-full ${colors[v as string] || 'bg-[#333] text-text-muted'}`}>
                     {v as string}
                 </span>
             );
@@ -64,7 +64,7 @@ const columns: Column<AttendanceEntity>[] = [
         key: 'verification_method',
         header: 'Method',
         render: (v) => (
-            <span className={`text-xs px-2 py-0.5 rounded-full ${v === 'Face' ? 'bg-primary-50 text-primary-700' : 'bg-orange-50 text-orange-700'
+            <span className={`text-xs px-2 py-0.5 rounded-full ${v === 'Face' ? 'bg-accent-500/10 text-accent-400' : 'bg-amber-500/10 text-amber-400'
                 }`}>
                 {v === 'Face' ? 'Face' : 'QR'}
             </span>
@@ -75,16 +75,16 @@ const columns: Column<AttendanceEntity>[] = [
         header: 'Confidence',
         render: (v) =>
             v != null ? (
-                <span className="text-xs text-gray-600">{((v as number) * 100).toFixed(0)}%</span>
+                <span className="text-xs text-text-secondary">{((v as number) * 100).toFixed(0)}%</span>
             ) : (
-                <span className="text-gray-400">—</span>
+                <span className="text-[#525252]">—</span>
             ),
     },
     {
         key: 'location_verified',
         header: 'Location',
         render: (v) => (
-            <span className={`text-xs ${v ? 'text-green-600' : 'text-gray-400'}`}>
+            <span className={`text-xs ${v ? 'text-emerald-400' : 'text-[#525252]'}`}>
                 {v ? '✓ Verified' : '—'}
             </span>
         ),
@@ -93,7 +93,7 @@ const columns: Column<AttendanceEntity>[] = [
         key: 'createdAt',
         header: 'Created',
         render: (v) => (
-            <span className="text-gray-500 text-xs">
+            <span className="text-text-muted text-xs">
                 {new Date(v as string).toLocaleDateString()}
             </span>
         ),

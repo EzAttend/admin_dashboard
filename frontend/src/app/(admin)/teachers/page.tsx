@@ -10,7 +10,7 @@ const columns: Column<TeacherEntity>[] = [
     key: 'teacher_id',
     header: 'Teacher ID',
     render: (v) => (
-      <span className="font-mono text-sm font-medium text-gray-900">{String(v)}</span>
+      <span className="font-mono text-sm font-medium text-white">{String(v)}</span>
     ),
   },
   {
@@ -18,9 +18,9 @@ const columns: Column<TeacherEntity>[] = [
     header: 'Name',
     render: (v) => {
       if (v && typeof v === 'object' && 'name' in (v as Record<string, unknown>)) {
-        return <span className="font-medium text-gray-900">{String((v as { name: string }).name)}</span>;
+        return <span className="font-medium text-white">{String((v as { name: string }).name)}</span>;
       }
-      return <span className="text-gray-400">—</span>;
+      return <span className="text-[#525252]">—</span>;
     },
   },
   {
@@ -28,9 +28,9 @@ const columns: Column<TeacherEntity>[] = [
     header: 'Email',
     render: (v) => {
       if (v && typeof v === 'object' && 'email' in (v as Record<string, unknown>)) {
-        return <span className="text-gray-600">{String((v as { email: string }).email)}</span>;
+        return <span className="text-[#a3a3a3]">{String((v as { email: string }).email)}</span>;
       }
-      return <span className="text-gray-400">—</span>;
+      return <span className="text-[#525252]">—</span>;
     },
   },
 ];
