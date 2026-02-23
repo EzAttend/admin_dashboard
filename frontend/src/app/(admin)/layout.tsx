@@ -14,7 +14,9 @@ import {
   ClipboardList,
   ChevronLeft,
   ChevronRight,
+  LogOut,
 } from 'lucide-react';
+import { signOut } from '@/lib/auth-client';
 import { useState } from 'react';
 
 /* ─── Navigation Definition ───────────────────────────────────── */
@@ -81,9 +83,8 @@ export default function AdminLayout({
     <div className="min-h-screen flex bg-surface">
       {/* Sidebar */}
       <aside
-        className={`${
-          collapsed ? 'w-17' : 'w-64'
-        } bg-sidebar text-white flex flex-col transition-all duration-200 ease-in-out shrink-0`}
+        className={`${collapsed ? 'w-17' : 'w-64'
+          } bg-sidebar text-white flex flex-col transition-all duration-200 ease-in-out shrink-0`}
       >
         {/* Logo area */}
         <div className="flex items-center gap-3 px-4 h-16 border-b border-white/10">
@@ -117,11 +118,10 @@ export default function AdminLayout({
                       key={item.href}
                       href={item.href}
                       title={collapsed ? item.label : undefined}
-                      className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
-                        isActive
+                      className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${isActive
                           ? 'bg-sidebar-active text-white font-medium'
                           : 'text-white/60 hover:bg-sidebar-hover hover:text-white/90'
-                      }`}
+                        }`}
                     >
                       <Icon className="w-4.5 h-4.5 shrink-0" />
                       {!collapsed && (
@@ -134,6 +134,19 @@ export default function AdminLayout({
             </div>
           ))}
         </nav>
+
+        {/* Sign Out */}
+        <button
+          onClick={async () => {
+            await signOut();
+            window.location.href = '/sign-in';
+          }}
+          className="flex items-center gap-3 px-4 py-3 text-sm text-white/50 hover:text-white/80 hover:bg-sidebar-hover transition-colors w-full"
+          title={collapsed ? 'Sign Out' : undefined}
+        >
+          <LogOut className="w-4.5 h-4.5 shrink-0" />
+          {!collapsed && <span>Sign Out</span>}
+        </button>
 
         {/* Collapse toggle */}
         <button

@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "dev": "bun --watch src/app.ts",
-    "build": "bun build src/server.ts --outdir ./dist --target bun",
+    "build": "bun build src/app.ts --outdir ./dist --target bun",
     "start": "bun dist/app.js",
     "test": "vitest",
     "lint": "eslint src/"
@@ -13,6 +13,7 @@
   "dependencies": {
     "amqplib": "^0.10.5",
     "bcryptjs": "^3.0.3",
+    "better-auth": "^1.4.18",
     "cors": "^2.8.5",
     "csv-parse": "^5.6.0",
     "dotenv": "^16.4.7",
@@ -24,8 +25,10 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@better-auth/cli": "^1.4.18",
     "@types/amqplib": "^0.10.6",
     "@types/bcryptjs": "^3.0.0",
+    "@types/bun": "^1.3.9",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
