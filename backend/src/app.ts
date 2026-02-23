@@ -10,6 +10,8 @@ import {
   studentRoutes,
   teacherRoutes,
   timetableRoutes,
+  sessionRoutes,
+  attendanceRoutes,
   jobRoutes,
 } from '@/routes';
 import { uploadRoutes } from '@/routes/upload.routes';
@@ -48,6 +50,8 @@ app.use('/api/rooms', roomRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/teachers', teacherRoutes);
 app.use('/api/timetable', timetableRoutes);
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/attendance', attendanceRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/upload', uploadRoutes);
 

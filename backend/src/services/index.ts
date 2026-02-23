@@ -7,6 +7,8 @@ export { roomService } from './room.service';
 export { studentService } from './student.service';
 export { teacherService } from './teacher.service';
 export { timetableService } from './timetable.service';
+export { sessionService } from './session.service';
+export { attendanceService } from './attendance.service';
 
 export {
   createJob,

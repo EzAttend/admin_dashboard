@@ -4,4 +4,6 @@ export { roomController } from './room.controller';
 export { studentController } from './student.controller';
 export { teacherController } from './teacher.controller';
 export { timetableController } from './timetable.controller';
+export { sessionController } from './session.controller';
+export { attendanceController } from './attendance.controller';
 export { jobController } from './job.controller';

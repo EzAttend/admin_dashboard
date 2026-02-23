@@ -78,3 +78,31 @@ export interface UploadJobEntity extends BaseEntity {
   created_by: string;
   completed_at?: string;
 }
+
+export interface TeacherLocationData {
+  lat: number;
+  lng: number;
+  altitude: number;
+}
+
+export interface SessionEntity extends BaseEntity {
+  timetable_id: string | TimetableEntity;
+  date: string;
+  is_active: boolean;
+  start_time_actual?: string;
+  teacher_location_data?: TeacherLocationData;
+  qr_code_secret?: string;
+}
+
+export type AttendanceStatus = 'Present' | 'Late' | 'Absent';
+export type VerificationMethod = 'Face' | 'QR_Fallback';
+
+export interface AttendanceEntity extends BaseEntity {
+  session_id: string | SessionEntity;
+  student_id: string | StudentEntity;
+  timestamp: string;
+  status: AttendanceStatus;
+  verification_method: VerificationMethod;
+  confidence_score?: number;
+  location_verified?: boolean;
+}

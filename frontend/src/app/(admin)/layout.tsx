@@ -15,6 +15,8 @@ import {
   ChevronLeft,
   ChevronRight,
   LogOut,
+  Clock,
+  CheckSquare,
 } from 'lucide-react';
 import { signOut, useSession } from '@/lib/auth-client';
 import { useState, useEffect } from 'react';
@@ -56,6 +58,13 @@ const NAV_GROUPS: NavGroup[] = [
     title: 'Schedule',
     items: [
       { href: '/timetable', label: 'Timetable', icon: Calendar },
+    ],
+  },
+  {
+    title: 'Attendance',
+    items: [
+      { href: '/sessions', label: 'Sessions', icon: Clock },
+      { href: '/attendance', label: 'Records', icon: CheckSquare },
     ],
   },
   {

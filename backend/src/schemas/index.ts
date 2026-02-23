@@ -19,3 +19,9 @@ export type { CreateRoomInput, UpdateRoomInput } from './room.schema';
 
 export { createTimetableSchema, updateTimetableSchema } from './timetable.schema';
 export type { CreateTimetableInput, UpdateTimetableInput } from './timetable.schema';
+
+export { createSessionSchema, updateSessionSchema } from './session.schema';
+export type { CreateSessionInput, UpdateSessionInput } from './session.schema';
+
+export { createAttendanceSchema, updateAttendanceSchema } from './attendance.schema';
+export type { CreateAttendanceInput, UpdateAttendanceInput } from './attendance.schema';

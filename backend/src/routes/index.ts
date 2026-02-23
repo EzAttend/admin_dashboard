@@ -4,5 +4,7 @@ export { roomRoutes } from './room.routes';
 export { studentRoutes } from './student.routes';
 export { teacherRoutes } from './teacher.routes';
 export { timetableRoutes } from './timetable.routes';
+export { sessionRoutes } from './session.routes';
+export { attendanceRoutes } from './attendance.routes';
 export { jobRoutes } from './job.routes';
 export { uploadRoutes } from './upload.routes';
