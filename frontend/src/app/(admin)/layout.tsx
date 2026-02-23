@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
   Users,
@@ -16,10 +16,8 @@ import {
   ChevronRight,
   LogOut,
 } from 'lucide-react';
-import { signOut } from '@/lib/auth-client';
-import { useState } from 'react';
-
-/* ─── Navigation Definition ───────────────────────────────────── */
+import { signOut, useSession } from '@/lib/auth-client';
+import { useState, useEffect } from 'react';
 
 interface NavItem {
   href: string;
@@ -77,7 +75,29 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { data: session, isPending } = useSession();
   const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (!isPending && !session) {
+      router.replace(`/sign-in?callbackUrl=${encodeURIComponent(pathname)}`);
+    }
+  }, [session, isPending, router, pathname]);
+
+  // Show loading while checking auth
+  if (isPending) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-surface">
+        <div className="animate-pulse text-gray-500">Loading...</div>
+      </div>
+    );
+  }
+
+  // Don't render anything if not authenticated (redirect is happening)
+  if (!session) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen flex bg-surface">

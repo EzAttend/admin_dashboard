@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function SignInPage() {
@@ -11,6 +11,8 @@ export default function SignInPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -29,7 +31,7 @@ export default function SignInPage() {
             return;
         }
 
-        router.push("/dashboard");
+        router.push(callbackUrl);
     }
 
     return (
