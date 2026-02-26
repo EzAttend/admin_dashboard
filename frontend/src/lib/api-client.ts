@@ -11,6 +11,7 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
 
   const config: RequestInit = {
     method,
+    credentials: 'include', // Send cookies for auth
     headers: {
       'Content-Type': 'application/json',
       ...headers,

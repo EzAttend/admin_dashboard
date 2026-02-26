@@ -7,6 +7,12 @@ export async function requireAuth(
     res: Response,
     next: NextFunction
 ): Promise<void>{
+    // Skip auth for CORS preflight requests
+    if (req.method === "OPTIONS") {
+        next();
+        return;
+    }
+
     const session = await auth.api.getSession({
         headers: fromNodeHeaders(req.headers),
     });

@@ -72,7 +72,7 @@ export async function connectQueue(): Promise<Channel> {
   const ch = await conn.createChannel();
   channel = ch;
 
-  console.log(`[Queue] Connected to RabbitMQ: ${ENV.RABBITMQ_URI}`);
+  console.log('[Queue] Connected to RabbitMQ');
 
   await ch.assertExchange(DLX_EXCHANGE, 'direct', { durable: true });
 

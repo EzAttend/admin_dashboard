@@ -5,7 +5,7 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 export const ENV = {
   PORT: parseInt(process.env.PORT || '5000', 10),
-  NODE_ENV: process.env.NODE_ENV || 'development',
+  NODE_ENV: process.env.NODE_ENV,
   MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/smart_attendance_db',
   RABBITMQ_URI: process.env.RABBITMQ_URI || 'amqp://localhost:5672',
 } as const;

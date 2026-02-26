@@ -1,10 +1,14 @@
 import { betterAuth } from "better-auth";
-import Database from "bun:sqlite";
+import { Database } from "bun:sqlite";
+import path from "path";
 
-const db = new Database("auth.db")
+// Use data directory for persistent storage (mounted volume in production)
+const dbPath = process.env.AUTH_DB_PATH || path.resolve(__dirname, "../../data/auth.db");
+const db = new Database(dbPath);
 
 export const auth = betterAuth({
-    database: db,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    database: db as any,
     secret: process.env.BETTER_AUTH_SECRET,
     baseURL: process.env.FRONTEND_URL || "http://localhost:3000",
 
