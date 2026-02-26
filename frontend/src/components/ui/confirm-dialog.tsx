@@ -41,17 +41,17 @@ export function ConfirmDialog({
     <Modal open={open} onClose={onClose} title={title}>
       <div className="flex items-start gap-3 mb-6">
         {danger && (
-          <div className="w-9 h-9 rounded-full bg-danger-50 flex items-center justify-center shrink-0">
-            <AlertTriangle className="w-4 h-4 text-danger-500" />
+          <div className="w-9 h-9 rounded-full bg-red-500/10 flex items-center justify-center shrink-0">
+            <AlertTriangle className="w-4 h-4 text-red-400" />
           </div>
         )}
-        <p className="text-sm text-gray-600 pt-2">{message}</p>
+        <p className="text-sm text-[#a3a3a3] pt-2">{message}</p>
       </div>
       <div className="flex justify-end gap-2">
         <button
           onClick={onClose}
           disabled={loading}
-          className="px-4 py-2 border border-border rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          className="px-4 py-2 border border-[#333] rounded-lg text-sm font-medium text-[#a3a3a3] hover:bg-[#242424] transition-colors"
         >
           Cancel
         </button>
@@ -60,8 +60,8 @@ export function ConfirmDialog({
           disabled={loading}
           className={`px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors disabled:opacity-50 ${
             danger
-              ? 'bg-danger-500 hover:bg-danger-700'
-              : 'bg-primary-600 hover:bg-primary-700'
+              ? 'bg-red-500 hover:bg-red-600'
+              : 'bg-accent-500 hover:bg-accent-600'
           }`}
         >
           {loading ? 'Processing...' : confirmLabel}

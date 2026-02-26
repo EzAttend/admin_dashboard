@@ -13,13 +13,13 @@ function refName(v: unknown, field: string): string {
 }
 
 const DAY_COLORS: Record<string, string> = {
-  Monday: 'bg-blue-50 text-blue-700',
-  Tuesday: 'bg-purple-50 text-purple-700',
-  Wednesday: 'bg-amber-50 text-amber-700',
-  Thursday: 'bg-emerald-50 text-emerald-700',
-  Friday: 'bg-rose-50 text-rose-700',
-  Saturday: 'bg-gray-100 text-gray-600',
-  Sunday: 'bg-gray-100 text-gray-600',
+  Monday: 'bg-blue-500/10 text-blue-400',
+  Tuesday: 'bg-purple-500/10 text-purple-400',
+  Wednesday: 'bg-amber-500/10 text-amber-400',
+  Thursday: 'bg-emerald-500/10 text-emerald-400',
+  Friday: 'bg-rose-500/10 text-rose-400',
+  Saturday: 'bg-[#333] text-[#737373]',
+  Sunday: 'bg-[#333] text-[#737373]',
 };
 
 const columns: Column<TimetableEntity>[] = [
@@ -28,19 +28,19 @@ const columns: Column<TimetableEntity>[] = [
     header: 'Day',
     render: (v) => {
       const day = String(v);
-      const color = DAY_COLORS[day] ?? 'bg-gray-100 text-gray-600';
+      const color = DAY_COLORS[day] ?? 'bg-[#333] text-[#737373]';
       return <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${color}`}>{day}</span>;
     },
   },
   {
     key: 'start_time',
     header: 'Start',
-    render: (v) => <span className="font-mono text-sm text-gray-700">{String(v)}</span>,
+    render: (v) => <span className="font-mono text-sm text-[#a3a3a3]">{String(v)}</span>,
   },
   {
     key: 'end_time',
     header: 'End',
-    render: (v) => <span className="font-mono text-sm text-gray-700">{String(v)}</span>,
+    render: (v) => <span className="font-mono text-sm text-[#a3a3a3]">{String(v)}</span>,
   },
   {
     key: 'class_id',
@@ -48,8 +48,8 @@ const columns: Column<TimetableEntity>[] = [
     render: (v) => {
       const name = refName(v, 'class_name');
       return name === '—'
-        ? <span className="text-gray-400">—</span>
-        : <span className="text-xs bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full">{name}</span>;
+        ? <span className="text-[#525252]">—</span>
+        : <span className="text-xs bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-full">{name}</span>;
     },
   },
   {
@@ -59,10 +59,10 @@ const columns: Column<TimetableEntity>[] = [
       if (v && typeof v === 'object') {
         const t = v as { userId?: string | { name: string } };
         if (t.userId && typeof t.userId === 'object' && 'name' in t.userId) {
-          return <span className="font-medium text-gray-900">{t.userId.name}</span>;
+          return <span className="font-medium text-white">{t.userId.name}</span>;
         }
       }
-      return <span className="text-gray-400">—</span>;
+      return <span className="text-[#525252]">—</span>;
     },
   },
   {
@@ -71,8 +71,8 @@ const columns: Column<TimetableEntity>[] = [
     render: (v) => {
       const code = refName(v, 'subject_code');
       return code === '—'
-        ? <span className="text-gray-400">—</span>
-        : <span className="font-mono text-sm font-medium">{code}</span>;
+        ? <span className="text-[#525252]">—</span>
+        : <span className="font-mono text-sm font-medium text-white">{code}</span>;
     },
   },
   {
@@ -81,8 +81,8 @@ const columns: Column<TimetableEntity>[] = [
     render: (v) => {
       const num = refName(v, 'room_number');
       return num === '—'
-        ? <span className="text-gray-400">—</span>
-        : <span className="text-xs bg-teal-50 text-teal-700 px-2 py-0.5 rounded-full">{num}</span>;
+        ? <span className="text-[#525252]">—</span>
+        : <span className="text-xs bg-teal-500/10 text-teal-400 px-2 py-0.5 rounded-full">{num}</span>;
     },
   },
 ];

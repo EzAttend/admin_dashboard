@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { asyncHandler, validate } from '@/middleware';
+import { asyncHandler, validate, requireAuth } from '@/middleware';
 import { idParamSchema } from '@/schemas';
 import type { CrudController } from '@/controllers/crud.factory';
 import type { ZodSchema } from 'zod';
@@ -13,6 +13,9 @@ export interface CrudRouteOptions {
 export function createCrudRoutes(opts: CrudRouteOptions): Router {
   const router = Router();
   const { controller, createSchema, updateSchema } = opts;
+
+  // All CRUD routes require authentication
+  router.use(requireAuth);
 
   router.get('/', asyncHandler(controller.list));
 

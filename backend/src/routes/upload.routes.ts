@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { asyncHandler } from '@/middleware';
+import { asyncHandler, requireAuth } from '@/middleware';
 import { ENTITY_TYPES, type EntityType } from '@/models/upload-job.model';
 import { parseCsv } from '@/ingestion/parsers';
 import { createJob, markJobFailed } from '@/services/job.service';
@@ -17,6 +17,9 @@ import type { EntityConfig } from '@/ingestion/types';
 import { StatusCodes } from 'http-status-codes';
 
 const router = Router();
+
+// All upload routes require authentication
+router.use(requireAuth);
 
 const ENTITY_CONFIG_MAP: Record<EntityType, EntityConfig<Record<string, unknown>>> = {
   CLASS_IMPORT: classEntityConfig as unknown as EntityConfig<Record<string, unknown>>,

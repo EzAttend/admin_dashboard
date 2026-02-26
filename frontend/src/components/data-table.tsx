@@ -82,8 +82,8 @@ export function DataTable<T extends { _id: string }>({
     return (
       <div className="animate-fade-in">
         <PageHeader title={title} description={description} count={null} />
-        <div className="bg-surface-raised border border-border rounded-xl p-12 flex flex-col items-center gap-3 text-gray-400">
-          <RefreshCw className="w-5 h-5 animate-spin" />
+        <div className="card p-12 flex flex-col items-center gap-3 text-[#737373]">
+          <RefreshCw className="w-5 h-5 animate-spin text-accent-500" />
           <p className="text-sm">Loading records...</p>
         </div>
       </div>
@@ -96,14 +96,14 @@ export function DataTable<T extends { _id: string }>({
     return (
       <div className="animate-fade-in">
         <PageHeader title={title} description={description} count={null} />
-        <div className="bg-danger-50 border border-red-200 rounded-xl p-6 flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-danger-500 mt-0.5 shrink-0" />
+        <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-6 flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-red-400 mt-0.5 shrink-0" />
           <div className="flex-1">
-            <p className="text-sm font-medium text-danger-700">Failed to load data</p>
-            <p className="text-sm text-danger-700/70 mt-1">{humanizeApiError(error)}</p>
+            <p className="text-sm font-medium text-red-400">Failed to load data</p>
+            <p className="text-sm text-red-400/70 mt-1">{humanizeApiError(error)}</p>
             <button
               onClick={refetch}
-              className="mt-3 text-sm font-medium text-danger-700 underline underline-offset-2 hover:text-danger-500 transition-colors"
+              className="mt-3 text-sm font-medium text-red-400 underline underline-offset-2 hover:text-red-300 transition-colors"
             >
               Try again
             </button>
@@ -124,7 +124,7 @@ export function DataTable<T extends { _id: string }>({
           {onCreate && (
             <button
               onClick={onCreate}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 active:bg-primary-800 transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-accent-500 text-white rounded-lg text-sm font-medium hover:bg-accent-600 active:bg-accent-700 transition-colors shadow-lg shadow-accent-500/20"
             >
               <Plus className="w-4 h-4" />
               Create
@@ -134,18 +134,18 @@ export function DataTable<T extends { _id: string }>({
       </div>
 
       {/* Search + Table */}
-      <div className="bg-surface-raised border border-border rounded-xl overflow-hidden">
+      <div className="card overflow-hidden">
         {/* Search bar */}
         {data.length > 0 && (
-          <div className="px-4 py-3 border-b border-border">
+          <div className="px-4 py-3 border-b border-[#333]">
             <div className="relative max-w-sm">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373]" />
               <input
                 type="text"
                 placeholder="Search records..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all bg-white"
+                className="w-full pl-9 pr-3 py-2 text-sm border border-[#333] rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500/30 focus:border-accent-500 transition-all bg-[#1a1a1a] text-white placeholder-[#525252]"
               />
             </div>
           </div>
@@ -154,12 +154,12 @@ export function DataTable<T extends { _id: string }>({
         {/* Empty state */}
         {data.length === 0 ? (
           <div className="p-12 flex flex-col items-center text-center">
-            <EmptyIcon className="w-10 h-10 text-gray-300 mb-3" />
-            <p className="text-sm text-gray-500">{emptyMessage}</p>
+            <EmptyIcon className="w-10 h-10 text-[#525252] mb-3" />
+            <p className="text-sm text-[#737373]">{emptyMessage}</p>
             {onCreate && (
               <button
                 onClick={onCreate}
-                className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+                className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-accent-500 text-white rounded-lg text-sm font-medium hover:bg-accent-600 transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 Create your first record
@@ -168,13 +168,13 @@ export function DataTable<T extends { _id: string }>({
           </div>
         ) : filtered.length === 0 ? (
           <div className="p-12 flex flex-col items-center text-center">
-            <Search className="w-10 h-10 text-gray-300 mb-3" />
-            <p className="text-sm text-gray-500">
+            <Search className="w-10 h-10 text-[#525252] mb-3" />
+            <p className="text-sm text-[#737373]">
               No results for &ldquo;{search}&rdquo;
             </p>
             <button
               onClick={() => setSearch('')}
-              className="mt-2 text-sm text-primary-600 hover:underline"
+              className="mt-2 text-sm text-accent-500 hover:underline"
             >
               Clear search
             </button>
@@ -184,32 +184,32 @@ export function DataTable<T extends { _id: string }>({
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-border bg-gray-50/50">
+                <tr className="border-b border-[#333] bg-[#1a1a1a]">
                   {columns.map((col, colIdx) => (
                     <th
                       key={colIdx}
-                      className="text-left px-4 py-3 font-medium text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap"
+                      className="text-left px-4 py-3 font-medium text-[#737373] text-xs uppercase tracking-wider whitespace-nowrap"
                     >
                       {col.header}
                     </th>
                   ))}
                   {hasActions && (
-                    <th className="text-right px-4 py-3 font-medium text-gray-500 text-xs uppercase tracking-wider whitespace-nowrap w-24">
+                    <th className="text-right px-4 py-3 font-medium text-[#737373] text-xs uppercase tracking-wider whitespace-nowrap w-24">
                       Actions
                     </th>
                   )}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border">
+              <tbody className="divide-y divide-[#262626]">
                 {filtered.map((row) => (
                   <tr
                     key={row._id}
-                    className="table-row-hover transition-colors"
+                    className="hover:bg-[#1f1f1f] transition-colors"
                   >
                     {columns.map((col, colIdx) => {
                       const value = (row as Record<string, unknown>)[String(col.key)];
                       return (
-                        <td key={colIdx} className="px-4 py-3 whitespace-nowrap text-gray-700">
+                        <td key={colIdx} className="px-4 py-3 whitespace-nowrap text-[#e5e5e5]">
                           {col.render ? col.render(value, row) : String(value ?? '—')}
                         </td>
                       );
@@ -220,7 +220,7 @@ export function DataTable<T extends { _id: string }>({
                           {onEdit && (
                             <button
                               onClick={() => onEdit(row)}
-                              className="p-1.5 rounded-md hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors"
+                              className="p-1.5 rounded-md hover:bg-[#333] text-[#737373] hover:text-white transition-colors"
                               title="Edit"
                             >
                               <Pencil className="h-4 w-4" />
@@ -229,7 +229,7 @@ export function DataTable<T extends { _id: string }>({
                           {onDelete && (
                             <button
                               onClick={() => onDelete(row)}
-                              className="p-1.5 rounded-md hover:bg-danger-50 text-gray-400 hover:text-danger-500 transition-colors"
+                              className="p-1.5 rounded-md hover:bg-red-500/10 text-[#737373] hover:text-red-400 transition-colors"
                               title="Delete"
                             >
                               <Trash2 className="h-4 w-4" />
@@ -247,7 +247,7 @@ export function DataTable<T extends { _id: string }>({
 
         {/* Footer with count */}
         {filtered.length > 0 && (
-          <div className="px-4 py-2.5 border-t border-border bg-gray-50/30 text-xs text-gray-400">
+          <div className="px-4 py-2.5 border-t border-[#333] bg-[#1a1a1a] text-xs text-[#737373]">
             Showing {filtered.length} of {data.length} record{data.length !== 1 ? 's' : ''}
           </div>
         )}
@@ -270,15 +270,15 @@ function PageHeader({
   return (
     <div>
       <div className="flex items-center gap-3">
-        <h1 className="text-xl font-bold text-gray-900">{title}</h1>
+        <h1 className="text-xl font-bold text-white">{title}</h1>
         {count !== null && (
-          <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+          <span className="text-xs font-medium bg-accent-500/10 text-accent-400 px-2 py-0.5 rounded-full">
             {count}
           </span>
         )}
       </div>
       {description && (
-        <p className="text-sm text-gray-500 mt-0.5">{description}</p>
+        <p className="text-sm text-[#737373] mt-0.5">{description}</p>
       )}
     </div>
   );

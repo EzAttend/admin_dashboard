@@ -1,19 +1,22 @@
 import { JOB_STATUS_INFO } from '@/lib/error-messages';
 
 const STATUS_STYLES: Record<string, { bg: string; dot: string }> = {
-  PENDING: { bg: 'bg-amber-50 text-amber-700', dot: 'bg-amber-400' },
-  RUNNING: { bg: 'bg-primary-50 text-primary-700', dot: 'bg-primary-400 animate-pulse-soft' },
-  COMPLETED: { bg: 'bg-success-50 text-success-700', dot: 'bg-success-500' },
-  FAILED: { bg: 'bg-danger-50 text-danger-700', dot: 'bg-danger-500' },
-  Active: { bg: 'bg-success-50 text-success-700', dot: 'bg-success-500' },
-  Inactive: { bg: 'bg-gray-100 text-gray-600', dot: 'bg-gray-400' },
-  Pending: { bg: 'bg-amber-50 text-amber-700', dot: 'bg-amber-400' },
-  Enrolled: { bg: 'bg-success-50 text-success-700', dot: 'bg-success-500' },
-  Failed: { bg: 'bg-danger-50 text-danger-700', dot: 'bg-danger-500' },
+  PENDING: { bg: 'bg-amber-500/10 text-amber-400', dot: 'bg-amber-400' },
+  RUNNING: { bg: 'bg-accent-500/10 text-accent-400', dot: 'bg-accent-400 animate-pulse-soft' },
+  COMPLETED: { bg: 'bg-emerald-500/10 text-emerald-400', dot: 'bg-emerald-400' },
+  FAILED: { bg: 'bg-red-500/10 text-red-400', dot: 'bg-red-400' },
+  Active: { bg: 'bg-emerald-500/10 text-emerald-400', dot: 'bg-emerald-400' },
+  Inactive: { bg: 'bg-[#333] text-[#737373]', dot: 'bg-[#525252]' },
+  Pending: { bg: 'bg-amber-500/10 text-amber-400', dot: 'bg-amber-400' },
+  Enrolled: { bg: 'bg-emerald-500/10 text-emerald-400', dot: 'bg-emerald-400' },
+  Failed: { bg: 'bg-red-500/10 text-red-400', dot: 'bg-red-400' },
+  Present: { bg: 'bg-emerald-500/10 text-emerald-400', dot: 'bg-emerald-400' },
+  Late: { bg: 'bg-amber-500/10 text-amber-400', dot: 'bg-amber-400' },
+  Absent: { bg: 'bg-red-500/10 text-red-400', dot: 'bg-red-400' },
 };
 
 export function StatusBadge({ status }: { status: string }) {
-  const style = STATUS_STYLES[status] ?? { bg: 'bg-gray-100 text-gray-600', dot: 'bg-gray-400' };
+  const style = STATUS_STYLES[status] ?? { bg: 'bg-[#333] text-[#a3a3a3]', dot: 'bg-[#525252]' };
   const info = JOB_STATUS_INFO[status];
   const label = info?.label ?? status;
 

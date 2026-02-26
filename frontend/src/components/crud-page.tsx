@@ -90,9 +90,9 @@ export function CrudPage<T extends { _id: string }>({
         wide={wide}
       >
         {state.error && (
-          <div className="flex items-start gap-2 bg-danger-50 border border-red-200 rounded-lg p-3 mb-4">
-            <AlertCircle className="w-4 h-4 text-danger-500 mt-0.5 shrink-0" />
-            <p className="text-sm text-danger-700">{humanizeApiError(state.error)}</p>
+          <div className="flex items-start gap-2 bg-red-900/20 border border-red-500/30 rounded-lg p-3 mb-4">
+            <AlertCircle className="w-4 h-4 text-red-400 mt-0.5 shrink-0" />
+            <p className="text-sm text-red-400">{humanizeApiError(state.error)}</p>
           </div>
         )}
         <div key={formKey}>

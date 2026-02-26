@@ -10,7 +10,7 @@ const columns: Column<SubjectEntity>[] = [
     key: 'subject_code',
     header: 'Code',
     render: (v) => (
-      <span className="font-mono text-sm font-medium text-gray-900">{String(v)}</span>
+      <span className="font-mono text-sm font-medium text-white">{String(v)}</span>
     ),
   },
   { key: 'subject_name', header: 'Subject Name' },
@@ -18,7 +18,7 @@ const columns: Column<SubjectEntity>[] = [
     key: 'createdAt',
     header: 'Created',
     render: (v) => (
-      <span className="text-gray-500 text-xs">{new Date(v as string).toLocaleDateString()}</span>
+      <span className="text-[#737373] text-xs">{new Date(v as string).toLocaleDateString()}</span>
     ),
   },
 ];
