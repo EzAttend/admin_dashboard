@@ -174,7 +174,7 @@ export function CsvUpload() {
       setPolling(true);
       const poll = async () => {
         try {
-          const res = await fetch(`${apiBase}/jobs/${jobId}`);
+          const res = await fetch(`${apiBase}/jobs/${jobId}`, { credentials: 'include' });
           const json = await res.json();
           if (json.status === 'ok' && json.data) {
             setJob(json.data);
@@ -223,6 +223,7 @@ export function CsvUpload() {
       const csvText = await file.text();
       const res = await fetch(`${apiBase}/upload/${entityType}`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'text/csv' },
         body: csvText,
       });
