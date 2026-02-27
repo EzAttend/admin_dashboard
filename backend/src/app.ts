@@ -52,7 +52,7 @@ const limiter = rateLimit({
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
-  message: { status: 'error', message: 'Too many requests, please try again later.' },
+  message: { status: 'error', message: 'Too many requests, please try again later after some time.' },
 });
 app.use(limiter);
 
