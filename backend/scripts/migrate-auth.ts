@@ -1,18 +1,15 @@
+//do-not touch this at any cost..contact krrish(Krrish2401)
 /// <reference types="bun-types" />
 import { Database } from "bun:sqlite";
-import { resolve } from "node:path";
 
-// Use same path as auth.ts
-const dbPath = Bun.env.AUTH_DB_PATH || resolve(import.meta.dir, "../data/auth.db");
+const dbPath = Bun.env.AUTH_DB_PATH || "/app/data/auth.db";
 
 console.log(`[Migration] Opening database at: ${dbPath}`);
 
 const db = new Database(dbPath);
 
-// Enable foreign keys
 db.run("PRAGMA foreign_keys = ON;");
 
-// better-auth required tables
 const migrations = [
   // User table
   `CREATE TABLE IF NOT EXISTS user (

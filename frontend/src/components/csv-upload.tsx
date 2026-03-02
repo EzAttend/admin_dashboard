@@ -156,7 +156,7 @@ export function CsvUpload() {
   const fileRef = useRef<HTMLInputElement>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  const apiBase = process.env.NEXT_PUBLIC_API_URL!;
   const selectedOption = ENTITY_OPTIONS.find((o) => o.value === entityType);
 
   /* ── Polling ──────────────────────────────────────────────── */

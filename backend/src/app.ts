@@ -32,8 +32,10 @@ import type { EntityConfig } from '@/ingestion/types';
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL!,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
@@ -111,7 +113,7 @@ async function bootstrap(): Promise<void> {
   }
 
   app.listen(ENV.PORT, () => {
-    console.log(`[Server] Running on http://localhost:${ENV.PORT} (${ENV.NODE_ENV})`);
+    console.log(`[Server] Running`);
   });
 }
 

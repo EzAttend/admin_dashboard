@@ -1,3 +1,4 @@
+#for dev only...run this and this will sping up a mongodb instance and rabbitmq instance, dont forget to change the URL in .env
 services:
   mongo:
     image: mongo:latest
